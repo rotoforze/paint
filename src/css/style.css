@@ -3,12 +3,12 @@
     padding: 0;
 }
 body {
-    height: 100dvh;
-    min-height: 100dvh;
-    max-height: 100dvh;
-    width: 100dvw;
-    min-width: 100dvw;
-    max-width: 100dvw;
+    height: 80dvh;
+    min-height: 80dvh;
+    max-height: 80dvh;
+    min-width: 80dvw;
+    max-width: 80dvw;
+    background-color: #838383;
 }
 .herramientas {
     height: 20%;
@@ -18,6 +18,13 @@ body {
     min-width: 100%;
     max-width: 100%;
     background-color: #838383;
+    border: #1f1f1f outset 10px;
+}
+.contenedor-pizarra {
+    height: -webkit-fill-available;
+    width: 90dvw;
+    padding: 10px;
+    margin: 0px auto 0px auto;
 }
 .pizarra {
     height: 80%;
@@ -26,8 +33,9 @@ body {
     width: 100%;
     min-width: 100%;
     max-width: 100%;
-    background-color: #efefef;
+    background-color: #ffffff;
     overflow: hidden;
+    border: #1f1f1f outset 10px;
 }
 .color {
     height: 15px;

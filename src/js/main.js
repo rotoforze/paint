@@ -28,4 +28,5 @@ function ratonLiberado() {
 // pizarra.onmousemove = () => { pintar(MouseEvent) };
 // pizarra.addEventListener("mousemove", pintar, false);
 pizarra.addEventListener("mousedown", ratonPresionado, false);
+pizarra.addEventListener("mouseleave", ratonLiberado, false);
 pizarra.addEventListener("mouseup", ratonLiberado, false);
