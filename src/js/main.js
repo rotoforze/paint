@@ -13,6 +13,7 @@ function pintar(event) {
 
 function addColor(event) {
     const elemTamPincel = document.querySelector(".valorTamPincel");
+    cambiarColor(document.querySelector(".mostrador-color").value);
 
     let tamanioPincel = 15;
     if (elemTamPincel.value) {
@@ -22,24 +23,71 @@ function addColor(event) {
     if (tamanioPincel > 100 | tamanioPincel < 1) {
         tamanioPincel = 10;
     }
-
+    const rect = pizarra.getBoundingClientRect();
     let ejeX = event.clientX;
-    // if (ejeX > pizarra.offsetWidth) {
-    //     ejeX = pizarra.offsetWidth;
-    // }
-    // if (ejeX < 0) {
-    //     ejeX = 0;
-    // }
+    
+    if (ejeX > rect.right) {
+        ejeX = rect.right;     
+    }
+    if (ejeX < 0) {
+        ejeX = 0;
+    }
 
     let ejeY = event.clientY;
-    // if (ejeY > pizarra.offsetHeight) {
-    //     ejeY = pizarra.offsetHeight;
-    // }
-    // if (ejeY < 0) {
-    //     ejeY = 0;
-    // }
+    if (ejeY > rect.bottom) {
+        ejeY = rect.bottom;
+    }
+    if (ejeY < 0) {
+        ejeY = 0;
+    }
+
+    console.log("new item in: "+ejeX+"#"+ejeY)
     const nuevoElemento = document.createElement("div");
     nuevoElemento.className = "color";
+
+    ejeX = ejeX - (tamanioPincel/2);
+    ejeY = ejeY - (tamanioPincel/2);
+    
+    nuevoElemento.setAttribute("style", "top:"+ejeY+"px; left:"+ejeX+"px;background-color:"+colorActual+";height:"+tamanioPincel+"px;width:"+tamanioPincel+"px;");
+    pizarra.appendChild(nuevoElemento);
+}
+
+function addColorTouch(event) {
+    const elemTamPincel = document.querySelector(".valorTamPincel");
+    cambiarColor(document.querySelector(".mostrador-color").value);
+
+    let tamanioPincel = 15;
+    if (elemTamPincel.value) {
+        tamanioPincel = elemTamPincel.value;
+    }
+
+    if (tamanioPincel > 100 | tamanioPincel < 1) {
+        tamanioPincel = 10;
+    }
+    const rect = pizarra.getBoundingClientRect();
+    let ejeX = event.touches[0].clientX;
+    
+    if (ejeX > rect.right) {
+        ejeX = rect.right;     
+    }
+    if (ejeX < 0) {
+        ejeX = 0;
+    }
+
+    let ejeY = event.touches[0].clientY;
+    if (ejeY > rect.bottom) {
+        ejeY = rect.bottom;
+    }
+    if (ejeY < 0) {
+        ejeY = 0;
+    }
+
+    console.log("new item in: "+ejeX+"#"+ejeY)
+    const nuevoElemento = document.createElement("div");
+    nuevoElemento.className = "color";
+
+    ejeX = ejeX - (tamanioPincel/2);
+    ejeY = ejeY - (tamanioPincel/2);
     
     nuevoElemento.setAttribute("style", "top:"+ejeY+"px; left:"+ejeX+"px;background-color:"+colorActual+";height:"+tamanioPincel+"px;width:"+tamanioPincel+"px;");
     pizarra.appendChild(nuevoElemento);
@@ -54,7 +102,7 @@ function ratonLiberado() {
 
 function cambiarColor(color) {
     colorActual = color;
-    document.body.setAttribute("style", "background-color:"+color+";");
+    document.querySelector(".mostrador-color").value = color;
 }
 
 function colocarColores() {
@@ -64,8 +112,9 @@ function colocarColores() {
     }
 }
 colocarColores();
-// pizarra.onmousemove = () => { pintar(MouseEvent) };
-// pizarra.addEventListener("mousemove", pintar, false);
+
 pizarra.addEventListener("mousedown", ratonPresionado, false);
 pizarra.addEventListener("mouseleave", ratonLiberado, false);
 pizarra.addEventListener("mouseup", ratonLiberado, false);
+
+pizarra.addEventListener("touchmove", addColorTouch, false);
