@@ -106,6 +106,12 @@ function cambiarColor(color) {
 }
 
 function colocarColores() {
+    const contenedor = document.querySelector(".contenedor-colores");
+    for (let i in colores) {
+        const nuevoColor = document.createElement("div");
+        nuevoColor.className = "colorPicker color"+i;
+        contenedor.appendChild(nuevoColor);
+    }
     for (let i in colores) {
         document.querySelector(".color"+i).setAttribute("style", "background-color:"+colores[i]+";")
         document.querySelector(".color"+i).addEventListener("click", () => { cambiarColor(colores[i]) });
